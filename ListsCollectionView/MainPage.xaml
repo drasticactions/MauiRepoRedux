@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ListsCollectionView"
+             x:DataType="{x:Type local:ListViewModel}"
+             x:Class="ListsCollectionView.MainPage">
+
+    <CollectionView ItemsSource="{Binding Items}" x:Name="CollectionView">
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Grid x:DataType="{x:Type local:ListViewItem}" BackgroundColor="{Binding BackgroundColor}" HeightRequest="{Binding Height}">
+                    <Label VerticalOptions="Center" HorizontalOptions="Center" Text="{Binding Title}"/>
+                </Grid>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+
+</ContentPage>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ListsCollectionView"
+             Title="VListPage"
+             xmlns:virtualizeListView="clr-namespace:MPowerKit.VirtualizeListView;assembly=MPowerKit.VirtualizeListView"
+             x:DataType="{x:Type local:ListViewModel}"
+             x:Class="ListsCollectionView.VListPage">
+    <ContentPage.Content>
+        <virtualizeListView:VirtualizeListView ItemsSource="{Binding Items}">
+            <virtualizeListView:VirtualizeListView.ItemTemplate>
+                <DataTemplate>
+                   <virtualizeListView:VirtualizeListViewCell x:DataType="{x:Type local:ListViewItem}" BackgroundColor="{Binding BackgroundColor}">
+                       <Grid HeightRequest="{Binding Height}">
+                           <Label VerticalOptions="Center" HorizontalOptions="Center" Text="{Binding Title}"/>
+                       </Grid>
+                   </virtualizeListView:VirtualizeListViewCell>
+                </DataTemplate>
+            </virtualizeListView:VirtualizeListView.ItemTemplate>
+        </virtualizeListView:VirtualizeListView>
+    </ContentPage.Content>
+</ContentPage>
