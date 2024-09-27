@@ -9,6 +9,10 @@
             <bindingViewTest:MyButton>
                 <Label Text="TESTING Button" />
             </bindingViewTest:MyButton>
+            
+            <bindingViewTest:MyBorder>
+                <Label Text="TESTING Border" />
+            </bindingViewTest:MyBorder>
         </VerticalStackLayout>
     </ScrollView>
 

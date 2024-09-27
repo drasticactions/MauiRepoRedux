@@ -15,9 +15,7 @@
                     <Setter.Value>
                         <ControlTemplate>
 
-                        <local:MyBorder>
                             <ContentView Content="{TemplateBinding Content}" />
-                        </local:MyBorder>
 
                         </ControlTemplate>
                     </Setter.Value>
