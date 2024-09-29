@@ -3,6 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatalystApp", "CatalystApp\CatalystApp.csproj", "{2D7F78C0-FF97-45A7-BDBB-BECDB991FDA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iOSApp", "iOSApp\iOSApp.csproj", "{EB60EB9C-B66F-4D1F-BA3A-1FB8C860D472}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppleShared", "AppleShared\AppleShared.csproj", "{6C4B0996-6DCA-41B0-BBA7-C1DB6AFC709C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiShared", "MauiShared\MauiShared.csproj", "{D0317AFE-1C69-4C03-BFDD-74A33E52312C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -10,5 +18,23 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2D7F78C0-FF97-45A7-BDBB-BECDB991FDA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D7F78C0-FF97-45A7-BDBB-BECDB991FDA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D7F78C0-FF97-45A7-BDBB-BECDB991FDA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D7F78C0-FF97-45A7-BDBB-BECDB991FDA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB60EB9C-B66F-4D1F-BA3A-1FB8C860D472}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB60EB9C-B66F-4D1F-BA3A-1FB8C860D472}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB60EB9C-B66F-4D1F-BA3A-1FB8C860D472}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB60EB9C-B66F-4D1F-BA3A-1FB8C860D472}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C4B0996-6DCA-41B0-BBA7-C1DB6AFC709C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C4B0996-6DCA-41B0-BBA7-C1DB6AFC709C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C4B0996-6DCA-41B0-BBA7-C1DB6AFC709C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C4B0996-6DCA-41B0-BBA7-C1DB6AFC709C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0317AFE-1C69-4C03-BFDD-74A33E52312C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0317AFE-1C69-4C03-BFDD-74A33E52312C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0317AFE-1C69-4C03-BFDD-74A33E52312C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0317AFE-1C69-4C03-BFDD-74A33E52312C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
