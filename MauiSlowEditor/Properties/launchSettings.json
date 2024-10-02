@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "MauiSlowEditor (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "MauiSlowEditor (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
