@@ -18,6 +18,7 @@ public partial class MainPage : ContentPage
 			if (fileResultList != null)
 			{
 				//Other logic
+				PdfLabel.Text = $"You selected {fileResultList.Count()} files";
 			}
 		}
 		catch (Exception ex)
