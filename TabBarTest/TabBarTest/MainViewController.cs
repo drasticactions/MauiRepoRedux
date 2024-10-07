@@ -17,13 +17,14 @@ public sealed class MainViewController : UITabBarController
         this.Sidebar.PreferredLayout = UITabBarControllerSidebarLayout.Tile;
         
         var test = UIListContentConfiguration.HeaderConfiguration;
-        test.Text = "Test";
+        test.Text = "Header Configuration";
         test.Image = UIImage.GetSystemImage("star.fill");
+        test.SecondaryText = "Header Secondary Text";
 
         var bottomTest = UIListContentConfiguration.FooterConfiguration;
-        bottomTest.Text = "Bottom Test";
+        bottomTest.Text = "Footer Configuration";
         bottomTest.Image = UIImage.GetSystemImage("star.fill");
-        bottomTest.SecondaryText = "Secondary Text";
+        bottomTest.SecondaryText = "Footer Secondary Text";
         this.Sidebar.HeaderContentConfiguration = test;
         this.Sidebar.FooterContentConfiguration = bottomTest;
         this.Sidebar.BottomBarView = new UIView(new CGRect(0, 0, 100, 400))
@@ -55,10 +56,10 @@ public sealed class MainViewController : UITabBarController
         
         this.Tabs = new UITab[]
         {
-            new UITab("Fart", UIImage.GetSystemImage("star.fill"), "Fart", (tab => new TestViewController("Fart"))),
+            new UITab("Fun Tab", UIImage.GetSystemImage("star.fill"), "FunTab", (tab => new TestViewController("Test"))),
             tabGroups2,
             tabGroups,
-            new UITab("Poop", UIImage.GetSystemImage("star.fill"), "Poop", (tab => new TestViewController("Fart"))),
+            new UITab("Funner Tab", UIImage.GetSystemImage("star.fill"), "FunnerTab", (tab => new TestViewController("Test"))),
         };
     }
 

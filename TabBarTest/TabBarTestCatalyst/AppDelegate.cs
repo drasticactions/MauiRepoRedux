@@ -1,3 +1,4 @@
+using AppKit;
 using TabBarTest;
 
 namespace TabBarTestCatalyst;
@@ -13,6 +14,10 @@ public class AppDelegate : UIApplicationDelegate {
 	{
 		// create a new window instance based on the screen size
 		Window = new UIWindow (UIScreen.MainScreen.Bounds);
+		var toolbar = new NSToolbar();
+		toolbar.Delegate = new ToolbarDelegate();
+		
+		Window.WindowScene!.Titlebar!.Toolbar = toolbar;
 
 		// create a UIViewController with a single UILabel
 		var vc = new MainViewController ();
