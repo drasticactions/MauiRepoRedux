@@ -13,8 +13,10 @@ public sealed class MainViewController : UITabBarController
         
         // this.SetViewControllers();
 
+        this.TraitOverrides.HorizontalSizeClass = UIUserInterfaceSizeClass.Compact;
         this.Mode = UITabBarControllerMode.TabSidebar;
         this.Sidebar.PreferredLayout = UITabBarControllerSidebarLayout.Tile;
+        this.Sidebar.Hidden = true;
         
         var test = UIListContentConfiguration.HeaderConfiguration;
         test.Text = "Header Configuration";
