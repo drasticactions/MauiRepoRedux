@@ -13,7 +13,8 @@ public class AppDelegate : UIApplicationDelegate {
 	{
 		// create a new window instance based on the screen size
 		Window = new UIWindow (UIScreen.MainScreen.Bounds);
-
+		var titlebar = Window.WindowScene.Titlebar;
+		titlebar.Vi
 		// create a UIViewController with a single UILabel
 		var isMacCatalyst = OperatingSystem.IsMacCatalyst();
 		var osVersion = Environment.OSVersion.VersionString;
