@@ -25,7 +25,7 @@ public class AppDelegate : UIApplicationDelegate {
 		ObjC.Call(item.Handle, "initWithFrame:", UIScreen.MainScreen.Bounds);
 		ObjC.Call(item.Handle, "setMaterial:", 21);
 		ObjC.Call(item.Handle, "setBlendingMode:", 0);
-		ObjC.Call(item.Handle, "setState:", 0);
+		ObjC.Call(item.Handle, "setState:", 1);
 		ObjC.Call(item.Handle, "setAutoresizingMask:", 18);
 		ObjC.Call(item.Handle, "setWantsLayer:", true);
 
@@ -51,10 +51,10 @@ public class AppDelegate : UIApplicationDelegate {
 			var contentView = nsWindow.NSWindow.PerformSelector(new Selector("contentView"))!;
 			ObjC.Call(contentView.Handle, "addSubview:positioned:relativeTo:", item.Handle, -1, IntPtr.Zero);
 			//ObjC.Call(nsWindow.NSWindow.Handle, "setContentView:", item.Handle);
+			
+			// make the window visible
+			Window.MakeKeyAndVisible ();
 		});
-		
-		// make the window visible
-		Window.MakeKeyAndVisible ();
 
 		return true;
 	}

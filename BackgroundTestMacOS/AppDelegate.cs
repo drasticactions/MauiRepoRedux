@@ -6,6 +6,7 @@ namespace BackgroundTestMacOS;
 [Register ("AppDelegate")]
 public class AppDelegate : NSApplicationDelegate {
 	private NSWindow _window;
+	private SampleViewController _viewController;
 	
 	public override void DidFinishLaunching (NSNotification notification)
 	{
@@ -14,8 +15,6 @@ public class AppDelegate : NSApplicationDelegate {
 		_window.Title = "Hello World";
 		_window.TitleVisibility = NSWindowTitleVisibility.Hidden;
 		_window.TitlebarAppearsTransparent = true;
-
-				
 		var visualEffectView = new NSVisualEffectView(_window.ContentView!.Bounds)
 		{
 			Material = NSVisualEffectMaterial.UnderWindowBackground,
@@ -24,26 +23,88 @@ public class AppDelegate : NSApplicationDelegate {
 			AutoresizingMask = NSViewResizingMask.HeightSizable | NSViewResizingMask.WidthSizable,
 			WantsLayer = true
 		};
-		
-		var contentView = _window.ContentView!;
-		contentView.AddSubview(new NSView(), NSWindowOrderingMode.Below, null);	
 
-		var item = Runtime.GetNSObject(AppKit.Call("NSVisualEffectView", "alloc"))!;
-		ObjC.Call(item.Handle, "initWithFrame:", _window.ContentView!.Bounds);
-		ObjC.Call(item.Handle, "setMaterial:", 21);
-		ObjC.Call(item.Handle, "setBlendingMode:", 0);
-		ObjC.Call(item.Handle, "setState:", 0);
-		ObjC.Call(item.Handle, "setAutoresizingMask:", 18);
-		ObjC.Call(item.Handle, "setWantsLayer:", true);
+		_window.ContentViewController = _viewController = new SampleViewController();
 		
-		ObjC.Call(_window.Handle, "setContentView:", item.Handle);
+		 var contentView = _window.ContentView!;
 		
+		 var item = Runtime.GetNSObject(AppKit.Call("NSVisualEffectView", "alloc"))!;
+		 ObjC.Call(item.Handle, "initWithFrame:", _window.ContentView!.Bounds);
+		 ObjC.Call(item.Handle, "setMaterial:", 21);
+		 ObjC.Call(item.Handle, "setBlendingMode:", 0);
+		 ObjC.Call(item.Handle, "setState:", 1);
+		 ObjC.Call(item.Handle, "setAutoresizingMask:", 18);
+		 ObjC.Call(item.Handle, "setWantsLayer:", true);
+		 
+		//  var subviewsPointer = contentView.PerformSelector(new Selector("subviews"));
+		//  var subviewsArray = NSArray.ArrayFromHandle<NSObject>(subviewsPointer.Handle);
+		//  var lastObj = subviewsArray.LastOrDefault();
+		//
+		
+		ObjC.Call(contentView.Handle, "addSubview:positioned:relativeTo:", item.Handle, -1, IntPtr.Zero);
+		// contentView.AddSubview(visualEffectView, NSWindowOrderingMode.Below, null);
+		// subviewsPointer = contentView.PerformSelector(new Selector("subviews"));
+		// subviewsArray = NSArray.ArrayFromHandle<NSObject>(subviewsPointer.Handle);
 		_window.MakeKeyAndOrderFront(this);
 	}
 
 	public override void WillTerminate (NSNotification notification)
 	{
 		// Insert code here to tear down your application
+	}
+}
+
+public class TestView : NSView
+{
+	private NSButton button = new NSButton() { Title = "Greetings from MacOS!", BezelStyle = NSBezelStyle.Rounded, };
+	
+	public TestView(CGRect rect) : base(rect)
+	{
+		this.WantsLayer = true;
+		this.Layer.BackgroundColor = NSColor.Clear.CGColor;
+		this.AutoresizingMask = NSViewResizingMask.HeightSizable | NSViewResizingMask.WidthSizable;
+		this.AddSubview(this.button);
+		this.button.TranslatesAutoresizingMaskIntoConstraints = false;
+		// Center button in view
+		this.button.CenterXAnchor.ConstraintEqualTo(this.CenterXAnchor).Active = true;
+		this.button.CenterYAnchor.ConstraintEqualTo(this.CenterYAnchor).Active = true;
+	}
+	
+	public TestView() : base()
+	{
+		this.WantsLayer = true;
+		this.Layer.BackgroundColor = NSColor.Clear.CGColor;
+		this.AutoresizingMask = NSViewResizingMask.HeightSizable | NSViewResizingMask.WidthSizable;
+		this.AddSubview(this.button);
+		this.button.TranslatesAutoresizingMaskIntoConstraints = false;
+		// Center button in view
+		this.button.CenterXAnchor.ConstraintEqualTo(this.CenterXAnchor).Active = true;
+		this.button.CenterYAnchor.ConstraintEqualTo(this.CenterYAnchor).Active = true;
+	}
+}
+
+public class SampleViewController : NSViewController
+{
+	private NSButton button = new NSButton() { Title = "Greetings from MacOS!", BezelStyle = NSBezelStyle.Rounded, };
+
+	public SampleViewController() : base()
+	{
+		PreferredContentSize = new CoreGraphics.CGSize(290, 300);
+	}
+	
+	public override void ViewDidLoad()
+	{
+		base.ViewDidLoad();
+
+		this.View!.AddSubview(new TestView());
+	}
+
+	public override void LoadView()
+	{
+		// This is how you create NSViewControllers without XIBs
+		// Without it, the view will explode on loading.
+		// <3 Apple.
+		this.View = new NSView();
 	}
 }
 
