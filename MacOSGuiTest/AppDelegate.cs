@@ -8,8 +8,12 @@ public class AppDelegate : NSApplicationDelegate
 {
 	public override void DidFinishLaunching(NSNotification notification)
 	{
-		 var mainWindowController = new MainWindowController(new CGRect(200, 200, 400, 400));
-        mainWindowController.Window.OrderFront(this);
+		var mainWindow = new MainWindow();
+		mainWindow.Title = "Hello World";
+		mainWindow.Center();
+		mainWindow.MakeKeyAndOrderFront(this);
+		// var mainWindowController = new MainWindowController(new CGRect(200, 200, 400, 400));
+        //mainWindowController.Window.OrderFront(this);
 	}
 
 	public override void WillTerminate(NSNotification notification)
@@ -52,6 +56,12 @@ public class MainWindow : NSWindow
 	private PostEditorScrollView postEditor;
 	private NSView imageWrapperView;
 
+	private Constraint height;
+
+	private Constraint left;
+
+	private bool isExpanded = false;
+
 	public MainWindow()
 		: base(new CGRect(200, 200, 400, 400), NSWindowStyle.Titled | NSWindowStyle.Closable | NSWindowStyle.Resizable, NSBackingStore.Buffered, false)
 	{
@@ -59,6 +69,7 @@ public class MainWindow : NSWindow
 		this.ContentView = new NSView();
 		imageWrapperView = new NSView();
 		imageWrapperView.WantsLayer = true;
+		imageWrapperView.Layer.BackgroundColor = NSColor.SystemBlue.CGColor;
 		var buttonsView = new NSView();
 		buttonsView.WantsLayer = true;
 		this.ContentView.AddSubview(postEditor);
@@ -76,7 +87,18 @@ public class MainWindow : NSWindow
 		buttonsView.AddSubview(buttonOne);
 		buttonOne.Activated += (sender, e) =>
 		{
+			// Animate the height constraint
+			NSAnimationContext.BeginGrouping();
+			NSAnimationContext.CurrentContext.Duration = 0.3;
+			NSAnimationContext.CurrentContext.TimingFunction = CAMediaTimingFunction.FromName(CAMediaTimingFunction.EaseInEaseOut);
 
+			// Toggle between 100 and 300 height
+			
+			// ((NSLayoutConstraint)heightConstraint.Animator).Constant = isExpanded ? 100 : 300;
+			// isExpanded = !isExpanded;
+			((Constraint)height.Animator).EqualTo(NSObject.FromObject(isExpanded ? 0 : 300));
+			isExpanded = !isExpanded;
+			NSAnimationContext.EndGrouping();
 		};
 		buttonsView.AddSubview(buttonTwo);
 		buttonTwo.Activated += (sender, e) =>
@@ -114,12 +136,12 @@ public class MainWindow : NSWindow
 			make.Height.EqualTo(NSObject.FromObject(100));
 		});
 
-		var test = imageWrapperView.MakeConstraints(make =>
+		imageWrapperView.MakeConstraints(make =>
 		{
 			make.Top.EqualTo(this.postEditor.Bottom()).Offset(20);
-			make.Left.EqualTo(this.ContentView).Offset(20);
+			this.left = make.Left.EqualTo(this.ContentView).Offset(20);
 			make.Right.EqualTo(this.ContentView).Offset(-20);
-			make.Height.EqualTo(NSObject.FromObject(0));
+			this.height = make.Height.EqualTo(NSObject.FromObject(0));
 		});
 
 		buttonsView.MakeConstraints(make =>
