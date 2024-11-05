@@ -23,6 +23,12 @@ public partial class MainPage : ContentPage
 		var result = await Screenshot.CaptureAsync();
 		var fileStream = await result.OpenReadAsync();
 		var image = new Image { Source = ImageSource.FromStream(() => fileStream) };
+		var bytes = await result.OpenReadAsync();
+		var buffer = new byte[bytes.Length];
+		await bytes.ReadAsync(buffer.AsMemory(0, buffer.Length));
+		var localDocs = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+		var filePath = Path.Combine(localDocs, "screenshot.png");
+		File.WriteAllBytes(filePath, buffer);
 		DotNetBotImage.Source = image.Source;
 	}
 }

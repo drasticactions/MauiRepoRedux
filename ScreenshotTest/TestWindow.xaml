@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Window xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ScreenshotTest.TestWindow">
+    <Window.TitleBar>
+       <TitleBar x:Name="TestTitlebar">
+           <TitleBar.Content>
+               <Grid ColumnSpacing="5" Padding="5, 0, 0, 5" ColumnDefinitions="Auto, *, 50" HeightRequest="100">
+                   <Label VerticalOptions="Center" BackgroundColor="Green" Text="Hello!" FontSize="20"/>
+                   <Button Grid.Column="2">
+                       <Button.ImageSource>
+                           <FileImageSource File="dotnet_bot.png"/>
+                       </Button.ImageSource>
+                   </Button>
+               </Grid>
+           </TitleBar.Content>
+       </TitleBar>
+    </Window.TitleBar>
+</Window>
