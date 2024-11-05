@@ -20,7 +20,7 @@ public partial class MainPage : ContentPage
 
 		SemanticScreenReader.Announce(CounterBtn.Text);
 
-		var result = await Screenshot.CaptureAsync();
+		var result = await this.Window!.CaptureAsync();
 		var fileStream = await result.OpenReadAsync();
 		var image = new Image { Source = ImageSource.FromStream(() => fileStream) };
 		var bytes = await result.OpenReadAsync();
