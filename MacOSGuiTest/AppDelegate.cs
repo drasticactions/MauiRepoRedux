@@ -8,9 +8,7 @@ public class AppDelegate : NSApplicationDelegate
 {
 	public override void DidFinishLaunching(NSNotification notification)
 	{
-		var mainWindow = new MainWindow();
-		mainWindow.Title = "Hello World";
-		mainWindow.Center();
+		var mainWindow = new PreferencesWindow();
 		mainWindow.MakeKeyAndOrderFront(this);
 		// var mainWindowController = new MainWindowController(new CGRect(200, 200, 400, 400));
         //mainWindowController.Window.OrderFront(this);
@@ -21,6 +19,168 @@ public class AppDelegate : NSApplicationDelegate
 		// Insert code here to tear down your application
 	}
 }
+
+public class PreferencesWindow : NSWindow
+    {
+        private NSToolbar toolbar;
+        private NSView generalView;
+        private NSView accountView;
+        private NSView advancedView;
+        
+        // Keep track of the current view being displayed
+        private NSView currentView;
+        
+        public PreferencesWindow()
+            : base(
+                contentRect: new CGRect(0, 0, 500, 350),
+                NSWindowStyle.Titled | NSWindowStyle.Closable,
+                NSBackingStore.Buffered,
+                false)
+        {
+            Title = "Preferences";
+            //TitleVisibility = NSWindowTitleVisibility.Hidden;
+            this.ToolbarStyle = NSWindowToolbarStyle.Preference;
+            Center();
+            
+            InitializeToolbar();
+            InitializeViews();
+            
+            // Set the general view as default
+            SwitchToView(generalView);
+        }
+        
+        private void InitializeToolbar()
+        {
+            toolbar = new NSToolbar("preferencesToolbar");
+            toolbar.AllowsUserCustomization = false;
+            toolbar.DisplayMode = NSToolbarDisplayMode.IconAndLabel;
+            toolbar.Delegate = new PreferencesToolbarDelegate(this);
+            
+            Toolbar = toolbar;
+        }
+        
+        private void InitializeViews()
+        {
+            // General preferences view
+            generalView = new NSView(Frame);
+            generalView.WantsLayer = true;
+            generalView.Layer.BackgroundColor = NSColor.SystemBlue.CGColor;
+            var generalLabel = new NSTextField(new CGRect(20, Frame.Height - 50, Frame.Width - 40, 24))
+            {
+                StringValue = "General Preferences",
+                Editable = false,
+                Bordered = false,
+                BackgroundColor = NSColor.Clear,
+                Font = NSFont.BoldSystemFontOfSize(16)
+            };
+            generalView.AddSubview(generalLabel);
+            
+            // Account preferences view
+            accountView = new NSView(Frame);
+            var accountLabel = new NSTextField(new CGRect(20, Frame.Height - 50, Frame.Width - 40, 24))
+            {
+                StringValue = "Account Settings",
+                Editable = false,
+                Bordered = false,
+                BackgroundColor = NSColor.Clear,
+                Font = NSFont.BoldSystemFontOfSize(16)
+            };
+            accountView.AddSubview(accountLabel);
+            
+            // Advanced preferences view
+            advancedView = new NSView(Frame);
+            var advancedLabel = new NSTextField(new CGRect(20, Frame.Height - 50, Frame.Width - 40, 24))
+            {
+                StringValue = "Advanced Settings",
+                Editable = false,
+                Bordered = false,
+                BackgroundColor = NSColor.Clear,
+                Font = NSFont.BoldSystemFontOfSize(16)
+            };
+            advancedView.AddSubview(advancedLabel);
+        }
+        
+        public void SwitchToView(NSView view)
+        {
+            if (currentView != null)
+            {
+                currentView.RemoveFromSuperview();
+            }
+            
+            ContentView.AddSubview(view);
+            currentView = view;
+            view.MakeConstraints(m =>
+			{
+				m.Top.EqualTo(ContentView).Offset(20);
+				m.Left.EqualTo(ContentView).Offset(20);
+				m.Right.EqualTo(ContentView).Offset(-20);
+				m.Bottom.EqualTo(ContentView).Offset(-20);
+			});
+        }
+        
+        public NSView GetViewForIdentifier(string identifier)
+        {
+            switch (identifier)
+            {
+                case "general":
+                    return generalView;
+                case "account":
+                    return accountView;
+                case "advanced":
+                    return advancedView;
+                default:
+                    return generalView;
+            }
+        }
+    }
+    
+    public class PreferencesToolbarDelegate : NSToolbarDelegate
+    {
+        private readonly PreferencesWindow preferencesWindow;
+        private readonly string[] toolbarIdentifiers = new[] { "general", "account", "advanced" };
+        
+        public PreferencesToolbarDelegate(PreferencesWindow window)
+        {
+            preferencesWindow = window;
+        }
+        
+        public override string[] DefaultItemIdentifiers(NSToolbar toolbar)
+        {
+            return toolbarIdentifiers;
+        }
+        
+        public override string[] AllowedItemIdentifiers(NSToolbar toolbar)
+        {
+            return toolbarIdentifiers;
+        }
+        
+        public override NSToolbarItem WillInsertItem(NSToolbar toolbar, string itemIdentifier, bool willBeInserted)
+        {
+            var toolbarItem = new NSToolbarItem(itemIdentifier);
+            switch (itemIdentifier)
+            {
+                case "general":
+                    toolbarItem.Label = "General";
+                    toolbarItem.Image = NSImage.GetSystemSymbol("star", null);
+                    break;
+                case "account":
+                    toolbarItem.Label = "Account";
+                    toolbarItem.Image = NSImage.GetSystemSymbol("star", null);
+                    break;
+                case "advanced":
+                    toolbarItem.Label = "Advanced";
+                    toolbarItem.Image = NSImage.GetSystemSymbol("star", null);
+                    break;
+            }
+            
+            toolbarItem.Activated += (sender, e) => {
+                preferencesWindow.SwitchToView(preferencesWindow.GetViewForIdentifier(itemIdentifier));
+            };
+            
+            return toolbarItem;
+        }
+    }
+
 
 public class MainWindow : NSWindow
 {
