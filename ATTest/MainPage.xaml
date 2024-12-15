@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+		     xmlns:mpowerkit="clr-namespace:MPowerKit.VirtualizeListView;assembly=MPowerKit.VirtualizeListView"
+		     xmlns:ff="clr-namespace:FishyFlip.Lexicon.App.Bsky.Feed;assembly=FishyFlip"
+			 x:Class="ATTest.MainPage">
+
+    <ContentPage.Content>
+        <mpowerkit:VirtualizeListView ItemsSource="{x:Bind Feed}">
+            <mpowerkit:VirtualizeListView.ItemsLayout>
+                <mpowerkit:LinearLayout ItemSpacing="5" 
+                                        InitialCachePoolSize="4" />
+            </mpowerkit:VirtualizeListView.ItemsLayout>
+            <mpowerkit:VirtualizeListView.ItemTemplate>
+                <DataTemplate x:DataType="ff:FeedViewPost">
+                    <mpowerkit:VirtualizeListViewCell>
+                        <Grid>
+                            <Label Text="{Binding Post.Author.DisplayName}" />
+                        </Grid>
+                    </mpowerkit:VirtualizeListViewCell>
+                </DataTemplate>
+            </mpowerkit:VirtualizeListView.ItemTemplate>
+        </mpowerkit:VirtualizeListView>
+    </ContentPage.Content>
+
+</ContentPage>
