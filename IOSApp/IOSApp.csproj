@@ -12,7 +12,7 @@
     -->
     <TrimMode Condition="'$(Configuration)' == 'Release'">full</TrimMode>
   </PropertyGroup>
-  <ItemGroup>
+  <!-- <ItemGroup>
     <ProjectReference Include="../IOSLibrary/IOSLibrary.csproj" />
-  </ItemGroup>
+  </ItemGroup> -->
 </Project>
