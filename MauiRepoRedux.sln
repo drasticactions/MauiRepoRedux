@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidTest", "AndroidTest\AndroidTest.csproj", "{3E41179E-2C56-4652-BA26-5B2A5E9B38F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatalystTest", "CatalystTest\CatalystTest.csproj", "{623B2EF6-A27F-411F-9544-1CF85E2A69A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -10,5 +14,15 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3E41179E-2C56-4652-BA26-5B2A5E9B38F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E41179E-2C56-4652-BA26-5B2A5E9B38F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E41179E-2C56-4652-BA26-5B2A5E9B38F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E41179E-2C56-4652-BA26-5B2A5E9B38F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{623B2EF6-A27F-411F-9544-1CF85E2A69A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{623B2EF6-A27F-411F-9544-1CF85E2A69A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{623B2EF6-A27F-411F-9544-1CF85E2A69A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{623B2EF6-A27F-411F-9544-1CF85E2A69A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
