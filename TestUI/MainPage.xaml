@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+		xmlns:controls="clr-namespace:Microsoft.Maui.Controls;assembly=VirtualListView"
+		xmlns:feed="clr-namespace:FishyFlip.Lexicon.App.Bsky.Feed;assembly=FishyFlip"
+			 x:Class="TestUI.MainPage">
+             <controls:VirtualListView x:Name="listView">
+                <controls:VirtualListView.ItemTemplate>
+                    <DataTemplate x:DataType="feed:FeedViewPost">
+                        <controls:VirtualViewCell>
+                            <Label Text="{Binding Post.PostRecord.Text}" />
+                        </controls:VirtualViewCell>
+                    </DataTemplate>
+                </controls:VirtualListView.ItemTemplate>
+             </controls:VirtualListView>
+</ContentPage>
