@@ -1,1 +1,4 @@
-<Solution />
+<Solution>
+  <Project Path="SDWebImageExample/SDWebImageExample.csproj" />
+  <Project Path="SDWebImageExampleIOS/SDWebImageExampleIOS.csproj" />
+</Solution>
