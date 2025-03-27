@@ -1,1 +1,5 @@
-<Solution />
+<Solution>
+  <Project Path="TestApp/TestApp.csproj">
+    <Deploy />
+  </Project>
+</Solution>
