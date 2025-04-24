@@ -9,6 +9,7 @@ nuget/
 .vscode/
 session.json
 xcuserdata/
+*.binlog
 
 *.xcscmblueprint
 *.xccheckout
