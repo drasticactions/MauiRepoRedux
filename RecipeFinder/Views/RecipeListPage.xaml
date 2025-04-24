@@ -2,7 +2,14 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RecipeFinder.Views.RecipeListPage"
+             xmlns:local="clr-namespace:RecipeFinder.Models"
+             xmlns:converters="clr-namespace:RecipeFinder.Converters"
              Title="Recipe Finder">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:BoolToStarConverter x:Key="BoolToStarConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <Grid RowDefinitions="Auto,*">
         <HorizontalStackLayout Grid.Row="0" Padding="10">
             <Label Text="Filter by: " VerticalOptions="Center" />
@@ -20,7 +27,7 @@
                         SelectionMode="Single"
                         SelectionChanged="RecipesCollection_SelectionChanged">
             <CollectionView.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate x:DataType="local:Recipe">
                     <Grid Padding="10" ColumnDefinitions="Auto,*,Auto">
                         <Image Grid.Column="0"
                                Source="{Binding ImageUrl}"

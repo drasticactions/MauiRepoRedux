@@ -9,10 +9,10 @@ public partial class RecipeListPage : ContentPage
 	private List<Recipe> _allRecipes;
 	private List<string> _categories;
 
-	public RecipeListPage(RecipeService recipeService)
+	public RecipeListPage()
 	{
 		InitializeComponent();
-		_recipeService = recipeService;
+		_recipeService = new RecipeService();
 
 		// Get initial data
 		_allRecipes = _recipeService.GetAllRecipes();
@@ -50,15 +50,16 @@ public partial class RecipeListPage : ContentPage
 	{
 		if (e.CurrentSelection.FirstOrDefault() is Recipe selectedRecipe)
 		{
-			// Navigate to detail page using Shell navigation
-			var navigationParameter = new Dictionary<string, object>
+			var queryParamters = new ShellNavigationQueryParameters
 			{
 				{ "Recipe", selectedRecipe },
+				{ "RecipeService", _recipeService }
 			};
-			await Shell.Current.GoToAsync(nameof(RecipeDetailPage), navigationParameter);
+
+			await Shell.Current.GoToAsync(nameof(RecipeDetailPage), queryParamters);
 
 			// Clear selection
-			//RecipesCollection.SelectedItem = null;
+			RecipesCollection.SelectedItem = null;
 		}
 	}
 

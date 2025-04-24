@@ -41,7 +41,7 @@
             <CollectionView x:Name="IngredientsCollection"
                             HeightRequest="120">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="x:String">
                         <Border Padding="10,5" 
                                 Margin="0,3" 
                                 StrokeShape="RoundRectangle 5">
@@ -59,7 +59,7 @@
             <CollectionView x:Name="InstructionsCollection"
                             HeightRequest="200">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="x:String">
                         <Grid ColumnDefinitions="Auto,*" Padding="0,3">
                             <Label Grid.Column="0"
                                    Text="{Binding ., StringFormat='Step {0}:'}"

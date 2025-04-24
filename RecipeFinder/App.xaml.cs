@@ -4,12 +4,9 @@ namespace RecipeFinder;
 
 public partial class App : Application
 {
-	private readonly RecipeService _recipeService;
-
-	public App(RecipeService recipeService)
+	public App()
 	{
 		InitializeComponent();
-		_recipeService = recipeService;
 	}
 
 	protected override Window CreateWindow(IActivationState? activationState)

@@ -5,44 +5,43 @@ namespace RecipeFinder.Views;
 
 public partial class RecipeDetailPage : ContentPage
 {
-	private Recipe _recipe;
+    private Recipe _recipe;
+    private RecipeService _recipeService;
     
-	private RecipeService _recipeService;
+    public RecipeDetailPage(Recipe recipe, RecipeService recipeService)
+    {
+        InitializeComponent();
+        _recipe = recipe;
+        _recipeService = recipeService;
+        
+        // Set recipe details
+        RecipeImage.Source = _recipe.ImageUrl;
+        RecipeName.Text = _recipe.Name;
+        RecipeCategory.Text = _recipe.Category;
+        RecipeDescription.Text = _recipe.Description;
+        
+        // Set favorite button
+        UpdateFavoriteButton();
+        
+        // Set collections
+        IngredientsCollection.ItemsSource = _recipe.Ingredients;
+        
+        // Create numbered instructions
+        var numberedInstructions = _recipe.Instructions
+            .Select((instruction, index) => $"{index + 1}. {instruction}")
+            .ToList();
+        InstructionsCollection.ItemsSource = numberedInstructions;
+    }
+    
+    private void UpdateFavoriteButton()
+    {
+        FavoriteButton.Source = _recipe.IsFavorite ? "star_filled.png" : "star_empty.png";
+    }
 
-	public RecipeDetailPage(Recipe recipe, RecipeService recipeService)
-	{
-		InitializeComponent();
-		_recipeService = recipeService;
-		_recipe = recipe;
-
-		// Set recipe details
-		RecipeImage.Source = _recipe.ImageUrl;
-		RecipeName.Text = _recipe.Name;
-		RecipeCategory.Text = _recipe.Category;
-		RecipeDescription.Text = _recipe.Description;
-
-		// Set favorite button
-		UpdateFavoriteButton();
-
-		// Set collections
-		IngredientsCollection.ItemsSource = _recipe.Ingredients;
-
-		// Create numbered instructions
-		var numberedInstructions = _recipe.Instructions
-			.Select((instruction, index) => $"{index + 1}. {instruction}")
-			.ToList();
-		InstructionsCollection.ItemsSource = numberedInstructions;
-	}
-
-	private void UpdateFavoriteButton()
-	{
-		FavoriteButton.Source = _recipe.IsFavorite ? "dotnet_bot.png" : "dotnet_bot.png";
-	}
-
-	private void FavoriteButton_Clicked(object sender, EventArgs e)
-	{
-		_recipeService.ToggleFavorite(_recipe.Id);
-		_recipe.IsFavorite = !_recipe.IsFavorite;
-		UpdateFavoriteButton();
-	}
+    private void FavoriteButton_Clicked(object sender, EventArgs e)
+    {
+        _recipeService.ToggleFavorite(_recipe.Id);
+        _recipe.IsFavorite = !_recipe.IsFavorite;
+        UpdateFavoriteButton();
+    }
 }
