@@ -1,5 +1,3 @@
-# MauiReposRedux
+# lipo-test
 
-This repo hosts various test projects, mostly related around .NET and the MAUI UI Framework
-
-Check the branches!
+Check the makefile for the lipo/copy steps.
